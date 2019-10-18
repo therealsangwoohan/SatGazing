@@ -19,7 +19,12 @@ def visualPasses(satId: int, lat: float, lng: float, alt: float, days: int,
     d = {}
     for key in passes[0]:
         d[key] = tuple(d[key] for d in passes)
-    return pd.DataFrame.from_dict(d)
+    df = pd.DataFrame.from_dict(d)
+    df = df[["startUTC", "endUTC", "startAz", "endAz", "startEl", "endEl"]]
+    df['startUTC'] = pd.to_datetime(df['startUTC'], unit='s')
+    df['endUTC'] = pd.to_datetime(df['endUTC'], unit='s')
+    df = df.rename(columns={"startUTC": "startTime", "endUTC": "endTIme"})
+    return df
 
 
 if __name__ == "__main__":
@@ -32,4 +37,4 @@ if __name__ == "__main__":
     seconds = sys.argv[nA - 2]
     apiKey = sys.argv[nA - 1]
     df = visualPasses(satID, lat, lng, alt, days, seconds, apiKey)
-    print(df[["startUTC", "endUTC", "startAz", "endAz", "startEl", "endEl"]])
+    print(df)
