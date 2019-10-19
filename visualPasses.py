@@ -1,10 +1,23 @@
+from pprint import pprint
 import numpy as np
 import pandas as pd
 import requests
 import json
 
+def convertSearch2Coord(search: str):
+    url = "https://us1.locationiq.com/v1/search.php"
+    data = {
+        'key': 'pk.86c36508e5bda29ff74b4fe11de36d96',
+        'q': search,
+        'format': 'json'
+    }
+    response = requests.get(url, params=data)
+    res = response.text
+    d = json.loads(res)
+    return d[0]
+# print(response.text)
 
-def visualPasses(satId_list: list, lat: float, lng: float, alt: float,
+def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
                  days: int, seconds: int, apiKey: str) -> pd.DataFrame:
     bigDF = pd.DataFrame()
     for satID in satID_list:
@@ -12,7 +25,7 @@ def visualPasses(satId_list: list, lat: float, lng: float, alt: float,
                                "satellite/visualpasses/" +
                                str(satID) + "/" +
                                str(lat) + "/" +
-                               str(lng) + "/" +
+                               str(lon) + "/" +
                                str(alt) + "/" +
                                str(days) + "/" +
                                str(seconds) + "/&apiKey=" +
@@ -44,16 +57,16 @@ def visualPasses(satId_list: list, lat: float, lng: float, alt: float,
 
 
 if __name__ == "__main__":
+    d = convertSearch2Coord("Ecole Polytechnique montreal")
     df = pd.read_csv("Popid.csv", delimiter=',', header=None)
-# print(df)
     satID_list = list(np.transpose(df.values)[0])
-    lat = 40.7487727
-    lng = -73.629700
+    lat = d["lat"]
+    lon = d["lon"] 
     alt = 0
     days = 1
     seconds = 1
     apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
-    df = visualPasses(satID_list, lat, lng, alt, days, seconds, apiKey)
+    df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
     print(df)
     parsed = json.loads(df.to_json(orient='index'))
     print(json.dumps(parsed, indent=4, sort_keys=True))
