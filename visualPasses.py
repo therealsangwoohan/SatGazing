@@ -27,7 +27,6 @@ def generate():
     seconds = 1
     apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
     df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
-    print(df)
     parsed = json.loads(df.to_json(orient='index'))
     print(json.dumps(parsed, indent=4, sort_keys=True))
     return render_template("info.html")
@@ -51,7 +50,7 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
     bigDF = pd.DataFrame()
     descriptions = json.load(open("descriptions.json"))
     launchDates = json.load(open("launchDates.json"))
-    for satID in satID_list:
+    for satID in satId_list:
         request = requests.get("http://www.n2yo.com/rest/v1/" +
                                "satellite/visualpasses/" +
                                str(satID) + "/" +
@@ -92,5 +91,4 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=7070)
-
+    app.run(host='127.0.0.1', port=8080)
