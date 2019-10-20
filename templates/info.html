@@ -34,41 +34,40 @@
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
-						<h2>Satellites</h2>
+						<h2><b>Satellites</b></h2>
 						<form action="/generate" method="post">
-							<!--Tableau de Kleard-->
-{#							<div class="wrapper">#}
-{#								<div class="profile">#}
-{#								   <table id= "userdata" border="2">#}
-{#								  <thead>#}
-{#											<th>Satellite Name</th>#}
-{#											<th>First Sighting</th>#}
-{#											<th>Last Sighting</th>#}
-{#											<th>Sight Duration (s)</th>#}
-{#											<th>First Azimuth</th>#}
-{#											<th>First Elevation</th>#}
-{#											<th>Last Azimuth</th>#}
-{#											<th>Last Elevation</th>#}
-{#										</thead>#}
-{#									  <tbody>#}
-{##}
-{#									   </tbody>#}
-{#								   </table>#}
-{#								#}
-{#								</div>#}
-{#							</div>#}
-							<!--Mon Tableau-->
+
+							<!--Mon Tableauu-->
 							<div>
 								<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-{#								<script type="text/javascript">#}
-{#									$.getJSON("../output.json", function(json) {#}
-{#										console.log(json);#}
-{#									});#}
-{#								</script>#}
+								<script src="../tablo.js"></script>
+								<div id="app"></div>
+								<script>
+									document.getElementById("app").innerHTML=`
+									<h3> ${txt.length} results </h3>
+									${txt.map(function(sat) {
+
+										return `<div class="animal">
+													<h2>${sat.satname}</h2>
+													<div style="text-align: left"
+													<br><u><b>First Sighting:</b></u> ${sat.startTime}
+													<br><u><b>Last Sighting:</b></u>  ${sat.endTime}
+													<br><u><b>Sight Duration:</b></u> ${sat.duration}
+													<br><u><b>Start Azimuth:</b></u>  ${sat.startAz}
+													<br><u><b>End Azimuth:</b></u>    ${sat.endAz}
+													<br><u><b>Start Elevation:</b></u>${sat.startEl}
+													<br><u><b>Last Elevation:</b></u> ${sat.endEl}
+													<br><u><b>Launch Date:</b></u>    ${sat.launchDate}
+													<br><u><b>Short Description:</b></u> ${sat.description}
+													</div>
+												</div>
+												`
+									}).join(' ')}
+									`
+								</script>
 							</div>
 						</form>
 					</header>
-					 
 				</div>
 			</section>
 
@@ -83,7 +82,7 @@
 			</section>
 
 		<!-- Testimonials -->
-		
+
 		<!-- Footer -->
 		<footer id="footer">
 			<section>
@@ -93,8 +92,10 @@
 
 
 		<!-- Scripts -->
-			<script src="../static/js/jquery.js"></script>
+			<script src="../static/js/jquery.min.js"></script>
 			<script src="../static/js/browser.min.js"></script>
+			<script src="../static/js/breakpoints.min.js"></script>
+			<script src="../static/js/util.js"></script>
 			<script src="../static/js/main.js"></script>
 
 
