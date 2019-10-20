@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 import json
 
+
 app = Flask(__name__)
 
 
@@ -30,8 +31,7 @@ def generate():
     json.dump(parsed, open("output.json", 'w'))
     return render_template("index.html")
 
-
-def convertSearch2Coord(search: str):
+def convertSearch2Coord(search):
     url = "https://us1.locationiq.com/v1/search.php"
     data = {
         'key': 'pk.86c36508e5bda29ff74b4fe11de36d96',
@@ -50,7 +50,11 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
     bigDF = pd.DataFrame()
     descriptions = json.load(open("descriptions.json"))
     launchDates = json.load(open("launchDates.json"))
+<<<<<<< .merge_file_a11716
     for satID in satId_list:
+=======
+    for satID in satID_list:
+>>>>>>> .merge_file_a11308
         request = requests.get("http://www.n2yo.com/rest/v1/" +
                                "satellite/visualpasses/" +
                                str(satID) + "/" +
@@ -91,4 +95,9 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
 
 
 if __name__ == "__main__":
+<<<<<<< .merge_file_a11716
     app.run(host='127.0.0.1', port=8080)
+=======
+    app.run(host='0.0.0.0', port=8080)
+
+>>>>>>> .merge_file_a11308
