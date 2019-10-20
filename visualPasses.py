@@ -1,8 +1,36 @@
 from pprint import pprint
+from flask import Flask, render_template, request
 import numpy as np
 import pandas as pd
 import requests
 import json
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/generate', methods=['POST'])
+def generate():
+    location = request.form.get("location")
+    d = convertSearch2Coord(location)
+    df = pd.read_csv("Popid.csv", delimiter=',', header=None)
+    satID_list = list(np.transpose(df.values)[0])
+    lat = d["lat"]
+    lon = d["lon"]
+    alt = 0
+    days = 1
+    seconds = 1
+    apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
+    df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
+    print(df)
+    parsed = json.loads(df.to_json(orient='index'))
+    print(json.dumps(parsed, indent=4, sort_keys=True))
+    return render_template("index.html")
+
 
 def convertSearch2Coord(search: str):
     url = "https://us1.locationiq.com/v1/search.php"
@@ -15,6 +43,8 @@ def convertSearch2Coord(search: str):
     res = response.text
     d = json.loads(res)
     return d[0]
+
+
 # print(response.text)
 
 def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
@@ -57,16 +87,4 @@ def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
 
 
 if __name__ == "__main__":
-    d = convertSearch2Coord("Ecole Polytechnique montreal")
-    df = pd.read_csv("Popid.csv", delimiter=',', header=None)
-    satID_list = list(np.transpose(df.values)[0])
-    lat = d["lat"]
-    lon = d["lon"] 
-    alt = 0
-    days = 1
-    seconds = 1
-    apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
-    df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
-    print(df)
-    parsed = json.loads(df.to_json(orient='index'))
-    print(json.dumps(parsed, indent=4, sort_keys=True))
+    app.run(host='0.0.0.0', port=8080)
