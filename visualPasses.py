@@ -1,8 +1,35 @@
 from pprint import pprint
+from flask import Flask, render_template, request
 import numpy as np
 import pandas as pd
 import requests
 import json
+
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/generate', methods=['POST'])
+def generate():
+    location = request.form.get("location")
+    d = convertSearch2Coord(location)
+    df = pd.read_csv("Popid.csv", delimiter=',', header=None)
+    satID_list = list(np.transpose(df.values)[0])
+    lat = d["lat"]
+    lon = d["lon"]
+    alt = 0
+    days = 1
+    seconds = 1
+    apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
+    df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
+    parsed = json.loads(df.to_json(orient='index'))
+    json.dump(parsed, open("output.json", 'w'))
+    return render_template("index.html")
 
 def convertSearch2Coord(search):
     url = "https://us1.locationiq.com/v1/search.php"
@@ -15,13 +42,15 @@ def convertSearch2Coord(search):
     res = response.text
     d = json.loads(res)
     return d[0]
+
+
 # print(response.text)
 
 def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
     bigDF = pd.DataFrame()
     descriptions = json.load(open("descriptions.json"))
     launchDates = json.load(open("launchDates.json"))
-    for satID in satID_list:
+    for satID in satId_list:
         request = requests.get("http://www.n2yo.com/rest/v1/" +
                                "satellite/visualpasses/" +
                                str(satID) + "/" +
@@ -62,15 +91,4 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
 
 
 if __name__ == "__main__":
-    d = convertSearch2Coord("Ecole Polytechnique montreal")
-    df = pd.read_csv("Popid.csv", delimiter=',', header=None)
-    satID_list = list(np.transpose(df.values)[0])
-    lat = d["lat"]
-    lon = d["lon"] 
-    alt = 0
-    days = 1
-    seconds = 1
-    apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
-    df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
-    parsed = json.loads(df.to_json(orient='index'))
-    json.dump(parsed, open("output.json", 'w'))
+    app.run(host='127.0.0.1', port=8080)

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<!--
+	By Mathusan Chandramohan, Victor Zhong, Kleard Mama, Sangwoo Han
+-->
+<html>
+	<head>
+		<title>Satellites</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../static/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="#top">Sat Gazing</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</nav>
+
+		
+
+		<!-- Highlights -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>Your Location</h2>
+						<form action="/generate" method="post">
+							<p> yoooo</p>
+						</form>
+					</header>
+					 
+				</div>
+			</section>
+
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div style="color:#D3D3D3" class="inner">
+					<h2>The marvels of space in your field of vision</h2>
+					<p>Space and its satellites are beautiful. Our goal is to bring the awe from the the satellites orbiting the Earth to you.
+					By using NASA and N2Yo's APIs, we can give you a list of all the satellites visible in you field of vision
+					depending on your location and the current day. Click on a satellite for more information. </p>
+				</div>
+			</section>
+
+		<!-- Testimonials -->
+		
+		<!-- Footer -->
+		<footer id="footer">
+			<section>
+				<a href="#"><p style="text-align:center">Top of the Page</p></a>
+			</section>
+		</footer>
+
+
+		<!-- Scripts -->
+			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/browser.min.js"></script>
+			<script src="../static/js/breakpoints.min.js"></script>
+			<script src="../static/js/util.js"></script>
+			<script src="../static/js/main.js"></script>
+			<script>
+			if ("geolocation" in navigator) {
+				console.log("yo");
+				var x=getCurrentPosition();
+				console.log(x);
+			  } else {
+				console.log("no");
+			  }
+			</script>
+
+	</body>
+</html>
