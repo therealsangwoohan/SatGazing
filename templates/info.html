@@ -37,38 +37,34 @@
 						<h2>Satellites</h2>
 						<form action="/generate" method="post">
 							<!--Tableau de Kleard-->
-							<div class="wrapper">
-								<div class="profile">
-								   <table id= "userdata" border="2">
-								  <thead>
-											<th>Satellite Name</th>
-											<th>First Sighting</th>
-											<th>Last Sighting</th>
-											<th>Sight Duration (s)</th>
-											<th>First Azimuth</th>
-											<th>First Elevation</th>
-											<th>Last Azimuth</th>
-											<th>Last Elevation</th>
-										</thead>
-									  <tbody>
-								
-									   </tbody>
-								   </table>
-								
-								</div>
-							</div>
-							<!--Mon Tableauu-->
+{#							<div class="wrapper">#}
+{#								<div class="profile">#}
+{#								   <table id= "userdata" border="2">#}
+{#								  <thead>#}
+{#											<th>Satellite Name</th>#}
+{#											<th>First Sighting</th>#}
+{#											<th>Last Sighting</th>#}
+{#											<th>Sight Duration (s)</th>#}
+{#											<th>First Azimuth</th>#}
+{#											<th>First Elevation</th>#}
+{#											<th>Last Azimuth</th>#}
+{#											<th>Last Elevation</th>#}
+{#										</thead>#}
+{#									  <tbody>#}
+{##}
+{#									   </tbody>#}
+{#								   </table>#}
+{#								#}
+{#								</div>#}
+{#							</div>#}
+							<!--Mon Tableau-->
 							<div>
 								<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-								<script>
-									$.UseCors(builder => builder
-									.AllowAnyOrigin()
-									.AllowAnyMethod()
-									.AllowAnyHeader())
-									$.getJSON('../static/output.json', function(data) {
-										console.log('it worked');
-									});
-								</script>
+{#								<script type="text/javascript">#}
+{#									$.getJSON("../output.json", function(json) {#}
+{#										console.log(json);#}
+{#									});#}
+{#								</script>#}
 							</div>
 						</form>
 					</header>
@@ -97,10 +93,8 @@
 
 
 		<!-- Scripts -->
-			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/jquery.js"></script>
 			<script src="../static/js/browser.min.js"></script>
-			<script src="../static/js/breakpoints.min.js"></script>
-			<script src="../static/js/util.js"></script>
 			<script src="../static/js/main.js"></script>
 
 

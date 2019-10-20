@@ -1,3 +1,4 @@
 .git/*
 .vs/*
 .idea/*
+output.json

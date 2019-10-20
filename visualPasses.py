@@ -28,7 +28,7 @@ def generate():
     apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
     df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
     parsed = json.loads(df.to_json(orient='index'))
-    print(json.dumps(parsed, indent=4, sort_keys=True))
+    json.dump(parsed, open("output.json", 'w'))
     return render_template("info.html")
 
 def convertSearch2Coord(search):
