@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 import json
 
-def convertSearch2Coord(search: str):
+def convertSearch2Coord(search):
     url = "https://us1.locationiq.com/v1/search.php"
     data = {
         'key': 'pk.86c36508e5bda29ff74b4fe11de36d96',
@@ -17,9 +17,10 @@ def convertSearch2Coord(search: str):
     return d[0]
 # print(response.text)
 
-def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
-                 days: int, seconds: int, apiKey: str) -> pd.DataFrame:
+def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
     bigDF = pd.DataFrame()
+    descriptions = json.load(open("descriptions.json"))
+    launchDates = json.load(open("launchDates.json"))
     for satID in satID_list:
         request = requests.get("http://www.n2yo.com/rest/v1/" +
                                "satellite/visualpasses/" +
@@ -32,6 +33,8 @@ def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
                                apiKey)
         request_json = request.json()
         satname = (request_json["info"])["satname"]
+        description = descriptions[satname]
+        launchDate = launchDates[satname]
         try:
             passes = request_json["passes"]
         except Exception:
@@ -46,6 +49,8 @@ def visualPasses(satId_list: list, lat: float, lon: float, alt: float,
         df['startUTC'] = pd.to_datetime(df['startUTC'], unit='s')
         df['endUTC'] = pd.to_datetime(df['endUTC'], unit='s')
         df = df.rename(columns={"startUTC": "startTime", "endUTC": "endTime"})
+        df["description"] = description
+        df["launchDate"] = launchDate
         df["satname"] = satname
         df = df.set_index("satname")
         bigDF = bigDF.append(df)
@@ -67,6 +72,5 @@ if __name__ == "__main__":
     seconds = 1
     apiKey = "HF5J3Q-L52Z93-EBH98V-47RW"
     df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
-    print(df)
     parsed = json.loads(df.to_json(orient='index'))
-    print(json.dumps(parsed, indent=4, sort_keys=True))
+    json.dump(parsed, open("output.json", 'w'))
