@@ -30,7 +30,7 @@ def generate():
     print(df)
     parsed = json.loads(df.to_json(orient='index'))
     print(json.dumps(parsed, indent=4, sort_keys=True))
-    return render_template("index.html")
+    return render_template("info.html")
 
 def convertSearch2Coord(search):
     url = "https://us1.locationiq.com/v1/search.php"
@@ -92,5 +92,5 @@ def visualPasses(satId_list, lat, lon, alt, days, seconds, apiKey):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=7070)
 

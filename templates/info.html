@@ -34,9 +34,42 @@
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
-						<h2>Your Location</h2>
+						<h2>Satellites</h2>
 						<form action="/generate" method="post">
-							<p> yoooo</p>
+							<!--Tableau de Kleard-->
+							<div class="wrapper">
+								<div class="profile">
+								   <table id= "userdata" border="2">
+								  <thead>
+											<th>Satellite Name</th>
+											<th>First Sighting</th>
+											<th>Last Sighting</th>
+											<th>Sight Duration (s)</th>
+											<th>First Azimuth</th>
+											<th>First Elevation</th>
+											<th>Last Azimuth</th>
+											<th>Last Elevation</th>
+										</thead>
+									  <tbody>
+								
+									   </tbody>
+								   </table>
+								
+								</div>
+							</div>
+							<!--Mon Tableauu-->
+							<div>
+								<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+								<script>
+									$.UseCors(builder => builder
+									.AllowAnyOrigin()
+									.AllowAnyMethod()
+									.AllowAnyHeader())
+									$.getJSON('../static/output.json', function(data) {
+										console.log('it worked');
+									});
+								</script>
+							</div>
 						</form>
 					</header>
 					 
@@ -69,15 +102,7 @@
 			<script src="../static/js/breakpoints.min.js"></script>
 			<script src="../static/js/util.js"></script>
 			<script src="../static/js/main.js"></script>
-			<script>
-			if ("geolocation" in navigator) {
-				console.log("yo");
-				var x=getCurrentPosition();
-				console.log(x);
-			  } else {
-				console.log("no");
-			  }
-			</script>
+
 
 	</body>
 </html>
