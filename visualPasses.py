@@ -29,7 +29,7 @@ def generate():
     df = visualPasses(satID_list, lat, lon, alt, days, seconds, apiKey)
     parsed = json.loads(df.to_json(orient='index'))
     json.dump(parsed, open("output.json", 'w'))
-    return render_template("index.html")
+    return render_template("info.html")
 
 def convertSearch2Coord(search):
     url = "https://us1.locationiq.com/v1/search.php"

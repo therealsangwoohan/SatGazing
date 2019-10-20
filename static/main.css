@@ -2511,7 +2511,7 @@ body {
 
   #header {
     height: 44px;
-    line-height: 44px; } }
+    line-height: 44x; } }
 @media screen and (max-width: 480px) {
   #header {
     min-width: 320px; } }
