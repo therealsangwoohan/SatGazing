@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<!--
+	By Mathusan Chandramohan, Victor Zhong, Kleard Mama, Sangwoo Han
+-->
+<html>
+	<head>
+		<title>Sat Gazing</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../static/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="#top">Sat Gazing</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h1>Sat Gazing</h1>
+					<p>A website capable of using your location and sending you information about the satellites that pass above you.<br /></p>
+				</div>
+			</section>
+
+		<!-- Highlights -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>Your Location</h2>
+						<form action="/generate" method="post">
+							Enter your location:<br>
+							<input type="text" name="location" id="location"><br>
+							<input type="submit" value="Show me satellites!" />
+						</form>
+					</header>
+					 
+				</div>
+			</section>
+
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div class="inner">
+					<h2>The marvels of space in your field of vision</h2>
+					<p>Space and its satellites are beautiful. Our goal is to bring the awe from the the satellites orbiting the Earth to you.
+					By using NASA and N2Yo's APIs, we can give you a list of all the satellites visible in you field of vision
+					depending on your location and the current day. Click on a satellite for more information. </p>
+				</div>
+			</section>
+
+		<!-- Testimonials -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>"Last name ever, first name greatest."</h2>
+						<p>Drake is the G.O.A.T</p>
+					</header>
+					<div class="testimonials">
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Mamaaaaa :( </p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="../static/pic00.png" alt="" />
+									</div>
+									<p class="credit">- <strong>Kleard Mama</strong> <span>Frontend</span></p>
+								</div>
+							</div>
+						</section>
+						<br>
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>I sucked dick a lot doing this hackathon. It was really fun.</p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="../static/pic01.png" alt="" />
+									</div>
+									<p class="credit">- <strong>Mathusan Chandramohan</strong> <span>Backend & Frontend</span></p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Je suis ouvertement gay.</p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="../static/pic02.png" alt="" />
+									</div>
+									<p class="credit">- <strong>Sangwoo Han</strong> <span>Backend</span></p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Je suis juste capable de faire frontend et backend.</p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="../static/pic03.png" alt="" />
+									</div>
+									<p class="credit">- <strong>Victor Zhong</strong> <span>Frontend</span></p>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+									<!--<p>LOL</p>-->
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2477.372679681213!2d-73.61288289999999!3d45.504384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc919f2a9fc4d71%3A0xda267ca95684133e!2sPolytechnique%20Montr%C3%A9al!5e1!3m2!1sen!2sca!4v1571513830332!5m2!1sen!2sca" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+
+		<!-- Footer -->
+			<footer id="footer">
+						<section>
+							<a href="#"><p style="text-align:center">Top of the Page</p></a>
+						</section>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/browser.min.js"></script>
+			<script src="../static/js/breakpoints.min.js"></script>
+			<script src="../static/js/util.js"></script>
+			<script src="../static/js/main.js"></script>
+			<script>
+			if ("geolocation" in navigator) {
+				console.log("yo");
+				var x=getCurrentPosition();
+				console.log(x);
+			  } else {
+				console.log("no");
+			  }
+			</script>
+
+	</body>
+</html>
